@@ -1,4 +1,5 @@
 import { Form, Input, Button } from "antd";
+import PostJoinUser from "../../services/postJoinUser";
 
 const formLayout = {
     labelCol: {
@@ -18,8 +19,9 @@ const formLayout = {
 function LoginInput({options}) {
     const [form] = Form.useForm();
 
-    const onFinish = (input) => {
+    const onFinish = async (input) => {
         console.log('loginpage onfinish input : ', input);
+        await PostJoinUser({...input, userType: "ADMIN"});
       }
     
     return (
