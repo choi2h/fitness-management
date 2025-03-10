@@ -1,11 +1,11 @@
 package com.fmserver.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -16,6 +16,14 @@ public class User {
 
     private String password;
 
+    @Enumerated(EnumType.STRING)
     private UserType userType;
 
+
+    @Builder
+    public User(String loginId, String password, UserType userType) {
+        this.loginId = loginId;
+        this.password = password;
+        this.userType = userType;
+    }
 }
