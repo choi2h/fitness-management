@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-function WelcomeLayout({children}) {
+function WelcomeLayout({title, children}) {
     return (
         <LayoutBackground>
             <ContentBox>
-                <h1>content</h1>
+                <h1>{title}</h1>
                 {children}
             </ContentBox>
         </LayoutBackground>
@@ -20,10 +20,19 @@ const LayoutBackground = styled.div`
 
 const ContentBox = styled.div`
     padding: 24px;
-    min-height: 580px;
-    min-width: 800px;
+    min-height: 380px;
+    min-width: 600px;
     background: #ffffff;
     border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1{
+        text-align: center;
+    }
 `;
 
 export default WelcomeLayout;

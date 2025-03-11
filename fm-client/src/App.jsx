@@ -1,6 +1,7 @@
 import {Routes, Route} from 'react-router-dom';
 import MainLayout from './layout/MainLayout';
 import LoginPage from './pages/LoginPage';
+import JoinPage from './pages/JoinPage';
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
       <Routes>
           <Route path="/" element={<MainLayout />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/join" element={<JoinPage />}></Route>
       </Routes>
     </div>
   );
