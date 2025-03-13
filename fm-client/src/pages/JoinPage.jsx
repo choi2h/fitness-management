@@ -41,13 +41,14 @@ const inputOptions = [
       }
     },
     {
-      type : 'Text',
+      type : 'Number',
       options : {
         label : '전화번호',
         name : 'phoneNumber',
         rules : [
           {
             required: true,
+            maxLength: 16, 
           }
         ]
       }
@@ -113,9 +114,21 @@ const inputOptions = [
 ];
 
 function JoinPage() {
+    const initValue = {
+        loginId: '',
+        password: '',
+        name: '',
+        gender: '',
+        phoneNumber: '',
+        birth: '',
+        zipCode: '',
+        address: '',
+        detailAddress: '',
+    }
+
     return (
       <WelcomeLayout title="회원가입">
-        <InputForm inputOptions={inputOptions} postInputValues={PostJoinUser} buttonText="회원가입"/>
+        <InputForm inputOptions={inputOptions} initValue={initValue} postInputValues={PostJoinUser} buttonText="회원가입"/>
       </WelcomeLayout>
     );
 }

@@ -31,9 +31,14 @@ const inputOptions = [
 ];
 
 function LoginPage() {
+    const initValue = {
+      loginId : '',
+      password : ''
+    }
+
     return (
       <WelcomeLayout title="로그인">
-        <InputForm inputOptions={inputOptions} postInputValues={PostLoginUser} buttonText="로그인"/>
+        <InputForm inputOptions={inputOptions} postInputValues={PostLoginUser} initValue={initValue} buttonText="로그인"/>
       </WelcomeLayout>
     );
 }
