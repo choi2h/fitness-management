@@ -75,7 +75,7 @@ const inputOptions = [
       }
     },
     {
-      type : 'Text',
+      type : 'Date',
       options : {
         label : '생년월일',
         name : 'birth',
@@ -87,16 +87,28 @@ const inputOptions = [
       }
     },
     {
-      type : 'Text',
+      type : 'Search',
       options : {
-        label : '주소',
-        name : 'address',
+        label : '우편번호',
+        name : 'zipCode',
         rules : [
           {
             required: true,
           }
         ]
       }
+    },
+    {
+    type : 'Text',
+    options : {
+        label : '상세주소',
+        name : 'detailAddress',
+        rules : [
+        {
+            required: true,
+        }
+        ]
+    }
     }
 ];
 

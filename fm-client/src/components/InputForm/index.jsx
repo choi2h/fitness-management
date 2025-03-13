@@ -1,4 +1,6 @@
-import { Form, Input, Radio, Button } from "antd";
+import { Form, Input, Radio, Button, Modal, DatePicker } from 'antd';
+import { useEffect, useState } from 'react';
+import AddressModal from '../AddressModal';
 
 const {Item} = Form;
 
@@ -17,6 +19,21 @@ const formLayout = {
     }
 };
 
+const AddressInput = (onSearch, address) => {
+  return (
+      <div>
+          <Input.Search
+            allowClear
+            enterButton="우편번호 찾기"
+            onSearch={onSearch}
+            value={address.zipCode}
+          />
+          <Input
+            value={address.address}/>
+      </div>
+  );
+}
+
 const getFieldInput = (type, options) => {
   if (type === 'Text') {
     return <Input />;
@@ -30,6 +47,8 @@ const getFieldInput = (type, options) => {
         }
       </Radio.Group>
     );
+  } else if(type === 'Date'){
+    return <DatePicker/>
   } else {
     return null;
   }
@@ -37,12 +56,34 @@ const getFieldInput = (type, options) => {
 
 function InputForm({inputOptions, postInputValues, buttonText}) {
     const [form] = Form.useForm();
+    const [openSearchAddress, setOpenSearchAddress] = useState(false);
+    const [address, setAddress] = useState(
+      {
+        zipCode : '',
+        address: '',
+        detail: ''
+      }
+    );
+    
+    useEffect(() => {
+      form.setFieldsValue({...address});
+      console.log('useEffect=> ', form.getFieldValue());
+    }, [form, address]);
 
     const onFinish = async (input) => {
         console.log(form.getFieldValue());
         console.log('loginpage onfinish input : ', input);
+        console.log(address);
         // await postInputValues({...input, userType: "ADMIN"});
-      }
+    }
+
+    const handleSearchAddress = () => {
+      setOpenSearchAddress(!openSearchAddress);
+    };
+
+    const onSearch = () => {
+      handleSearchAddress();
+    }
     
     return (
         <Form 
@@ -60,11 +101,28 @@ function InputForm({inputOptions, postInputValues, buttonText}) {
                   label= {options.label}
                   name= {options.name}
                   rules= {options.rules}
+                  fiel
                 >
-                  {getFieldInput(type, options)}
+                  {options.name == 'zipCode' ? AddressInput(onSearch, address) : getFieldInput(type, options)}
                 </Item>
               )
             })
+          }
+          {
+            openSearchAddress ? 
+            (
+              <Modal 
+                title="우편번호 검색" 
+                open={openSearchAddress}
+                onCancel={() => handleSearchAddress()}
+                footer={null}
+              >
+                <AddressModal
+                  setOpen={handleSearchAddress}
+                  setAddress={setAddress}
+                />
+              </Modal>
+            ) : null
           }
           <Item  
             wrapperCol={{
